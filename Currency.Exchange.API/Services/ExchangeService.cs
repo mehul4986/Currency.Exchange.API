@@ -73,12 +73,23 @@ namespace Currency.Exchange.API.Services
 
                     var response = await httpClient.GetAsync(ExchangeApiUrl);
 
-                    if (!response.IsSuccessStatusCode)
-                    {
-                        string msg = $"StatusCode {response.StatusCode}: Failed with HttpClient.GetAsync call to: {ExchangeApiUrl}";
-
-                        throw new HttpRequestException(msg);
-                    }
+                     if (response.StatusCode == System.Net.HttpStatusCode.TooManyRequests) {
+                         string msg = $"StatusCode {response.StatusCode}: Too many requests in a certain time frame with HttpClient.GetAsync call to: {ExchangeApiUrl}";
+                         Thread.Sleep(1000);
+                         throw new HttpRequestException(msg);
+                     }
+                    
+                     if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                     {
+                         string msg = $"StatusCode {response.StatusCode}: Access Key invalid with HttpClient.GetAsync call to: {ExchangeApiUrl}";
+                         throw new HttpRequestException(msg, null, response.StatusCode);
+                     }
+                    
+                     if (!response.IsSuccessStatusCode)
+                     {
+                         string msg = $"StatusCode {response.StatusCode}: Failed with HttpClient.GetAsync call to: {ExchangeApiUrl}";
+                         throw new HttpRequestException(msg);
+                     }
 
                     using (HttpContent content = response.Content)
                     {
