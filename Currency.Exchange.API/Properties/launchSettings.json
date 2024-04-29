@@ -1,0 +1,38 @@
+﻿{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:16997",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "Currency.Exchange.API": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "applicationUrl": "http://localhost:5048",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "logging_loglevel_default": "Warning",
+        "logging_loglevel_Microsoft.AspNetCore": "Warning",
+        "ExchangeRateConnStr": "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=CurrencyManager;Integrated Security=True;Integrated Security=SSPI;",
+        "openexchangeratesapikey": "6c85c50f5567466ea8e68001956f3460",
+        "openexchangeratesapi": "https://openexchangerates.org/api/latest.json?app_id=",
+        "RedisURL": "127.0.0.1:6379",
+        "CacheExpirationMinutes": "15"
+      }
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
